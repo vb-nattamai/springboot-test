@@ -1,0 +1,32 @@
+{
+  "static": {
+    "_comment": "These fields are set once. Edit manually. Never overwritten by the transformer.",
+    "repo_name": "springboot-test",
+    "primary_language": "Kotlin",
+    "language_version": "unknown",
+    "frameworks": [
+      "Spring Boot"
+    ],
+    "entry_point": ".agentic-toolkit/src/agent_ready/cli.py",
+    "api_protocol": "REST",
+    "restricted_write_paths": [],
+    "environment_variables": {}
+  },
+  "dynamic": {
+    "_comment": "These fields are refreshed automatically on every scan.",
+    "last_scanned": "2026-03-26T12:29:59.929922+00:00",
+    "module_layout": {
+      "src/": "Source code",
+      "tests/": "Test code"
+    },
+    "domain_concepts": [],
+    "agent_capabilities": [
+      "code_analysis",
+      "testing",
+      "building"
+    ],
+    "test_command": "unknown",
+    "build_command": "unknown",
+    "lint_command": ""
+  }
+}
