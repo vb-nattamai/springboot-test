@@ -1,0 +1,123 @@
+{
+  "static": {
+    "project_name": "travel-assist",
+    "description": "A Spring Boot travel assistance application providing a REST API for managing trips (CRUD operations) with JPA persistence, built with Kotlin and Spring Modulith.",
+    "primary_language": "Kotlin",
+    "frameworks": [
+      "Spring Boot 4.0.4",
+      "Spring Data JPA",
+      "Spring Modulith",
+      "Spring Web",
+      "Netflix DGS Codegen",
+      "Jackson Kotlin Module",
+      "GraalVM Native Image"
+    ],
+    "entry_point": "src/main/kotlin/com/vb/nattamai/travelassist/TravelAssistApplication.kt",
+    "test_command": "./gradlew test",
+    "restricted_write_paths": [
+      "gradle/wrapper/gradle-wrapper.jar",
+      "gradle/wrapper/gradle-wrapper.properties",
+      "gradlew",
+      "gradlew.bat",
+      ".gitattributes",
+      ".github/workflows/agentic-ready.yml",
+      ".github/workflows/context-refresh.yml"
+    ],
+    "environment_variables": [],
+    "domain_concepts": [
+      "Trip: The core domain entity representing a travel trip with title, description, destination, and date range, persisted in the 'trips' table.",
+      "TripDto: A data transfer object used for creating and updating Trip entities, with validation constraints (e.g., title must not be blank).",
+      "TripRepository: Spring Data JPA repository interface providing standard CRUD operations for the Trip entity.",
+      "TripService: Service layer encapsulating business logic for trip CRUD operations with transactional support.",
+      "TripController: REST controller exposing trip management endpoints under /api/trips with standard HTTP methods."
+    ]
+  },
+  "dynamic": {
+    "last_scanned": "2026-04-01T07:16:45.698111+00:00",
+    "secondary_languages": [],
+    "build_system": "gradle",
+    "build_command": "./gradlew build",
+    "install_command": "./gradlew dependencies",
+    "run_command": "./gradlew bootRun",
+    "test_framework": "JUnit 5",
+    "test_directory": "src/test/kotlin/com/vb/nattamai/travelassist",
+    "source_directories": [
+      "src/main/kotlin/com/vb/nattamai/travelassist"
+    ],
+    "module_layout": {
+      "controller": "src/main/kotlin/com/vb/nattamai/travelassist/controller",
+      "service": "src/main/kotlin/com/vb/nattamai/travelassist/service",
+      "repository": "src/main/kotlin/com/vb/nattamai/travelassist/repository",
+      "model": "src/main/kotlin/com/vb/nattamai/travelassist/model",
+      "dto": "src/main/kotlin/com/vb/nattamai/travelassist/dto"
+    },
+    "architecture_summary": "A standard Spring Boot layered architecture (Controller \u2192 Service \u2192 Repository) using Spring Data JPA for persistence against an H2 in-memory database. The project uses Spring Modulith for modular design and Netflix DGS codegen for GraphQL client generation. Kotlin data classes serve as both JPA entities and DTOs with Jakarta validation.",
+    "key_components": [
+      {
+        "name": "TravelAssistApplication",
+        "path": "src/main/kotlin/com/vb/nattamai/travelassist/TravelAssistApplication.kt",
+        "responsibility": "Spring Boot application entry point that bootstraps the application context."
+      },
+      {
+        "name": "TripController",
+        "path": "src/main/kotlin/com/vb/nattamai/travelassist/controller/TripController.kt",
+        "responsibility": "REST controller exposing CRUD endpoints for trips at /api/trips."
+      },
+      {
+        "name": "TripService",
+        "path": "src/main/kotlin/com/vb/nattamai/travelassist/service/TripService.kt",
+        "responsibility": "Service layer handling trip business logic and transactional persistence operations."
+      },
+      {
+        "name": "TripRepository",
+        "path": "src/main/kotlin/com/vb/nattamai/travelassist/repository/TripRepository.kt",
+        "responsibility": "Spring Data JPA repository providing database access for the Trip entity."
+      },
+      {
+        "name": "Trip",
+        "path": "src/main/kotlin/com/vb/nattamai/travelassist/model/Trip.kt",
+        "responsibility": "JPA entity representing a trip stored in the 'trips' database table."
+      },
+      {
+        "name": "TripDto",
+        "path": "src/main/kotlin/com/vb/nattamai/travelassist/dto/TripDto.kt",
+        "responsibility": "Data transfer object for trip creation/update requests with Jakarta validation constraints."
+      }
+    ],
+    "agent_safe_operations": [
+      "Add new endpoints to TripController following the existing REST pattern",
+      "Add new fields to Trip entity and TripDto (with corresponding service/controller updates)",
+      "Add new service classes following the existing @Service pattern",
+      "Add new repository interfaces extending JpaRepository",
+      "Add new test classes in the test directory",
+      "Modify application.properties or application.yml for configuration changes",
+      "Add new DTOs in the dto package",
+      "Add new model entities in the model package"
+    ],
+    "agent_forbidden_operations": [
+      "Modify or delete Gradle wrapper files (gradlew, gradlew.bat, gradle/wrapper/*)",
+      "Modify CI/CD workflow files under .github/workflows/",
+      "Change the Spring Boot or Kotlin version in build.gradle.kts without explicit instruction",
+      "Remove or rename the main application class TravelAssistApplication",
+      "Switch the database from H2 to a production database without explicit instruction",
+      "Modify settings.gradle.kts project name without understanding downstream impacts",
+      "Add secrets or credentials directly in source code or configuration files"
+    ],
+    "potential_pitfalls": [
+      "The project uses Spring Boot 4.0.4 which is a very recent/cutting-edge version \u2014 some plugins or libraries may have compatibility issues",
+      "Kotlin data classes used as JPA entities require special care: the Trip entity uses var for mutable fields but val for id, which is correct but fragile if changed",
+      "The DGS codegen plugin expects GraphQL schemas in src/main/resources/graphql-client but this directory may not exist yet \u2014 builds may fail on the generateJava task",
+      "H2 is the only configured database (runtime dependency) \u2014 there are no production database configurations",
+      "compose.yaml exists suggesting Docker Compose integration via spring-boot-docker-compose, but the file contents are unknown",
+      "The @Xannotation-default-target=param-property compiler flag affects how annotations are applied to Kotlin data class properties \u2014 removing it could break validation",
+      "Lombok is included as a dependency but is largely unnecessary in a Kotlin project \u2014 it may cause confusion",
+      "Both application.properties and application.yml exist \u2014 Spring Boot loads both, and conflicting keys may cause unexpected behavior"
+    ],
+    "conventions": {
+      "naming": "camelCase",
+      "structure": "single-package"
+    },
+    "has_ci": true,
+    "has_openapi": false
+  }
+}
